@@ -8,10 +8,6 @@ package org.somebody.ds.stack;
 
 public class StackException extends RuntimeException {
 
-    public StackException(String errorMessage) {
-        super(errorMessage);
-    }
-
     static class EmptyStackException extends RuntimeException {
 
         public EmptyStackException(String errorMessage) {
