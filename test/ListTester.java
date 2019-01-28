@@ -13,16 +13,21 @@ public class ListTester {
     public static void main(String[] args) {
 
         final SinglyLinkedList<Character> linkedList = new SinglyLinkedList();
+        linkedList.insertAtFront('D');
         linkedList.insertAtFront('C');
         linkedList.insertAtFront('B');
         linkedList.insertAtFront('A');
 
+        linkedList.display();
+        linkedList.reverse();
         linkedList.display();
 
         linkedList.deleteFromFront();
         linkedList.insertAtFront('X');
         linkedList.insertAtEnd('Z');
         linkedList.display();
+
+
 
     }
 

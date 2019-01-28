@@ -115,6 +115,7 @@ public class BinarySearchTree {
                 parentNode.setRightChild(nodeToBeDeleted.getLeftChild());
             }
         }
+        
         // if node has one child that is on the right
         else if (nodeToBeDeleted.getLeftChild() == null) {
             if (nodeToBeDeleted == root) {

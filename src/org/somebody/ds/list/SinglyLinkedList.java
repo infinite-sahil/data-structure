@@ -51,10 +51,22 @@ public class SinglyLinkedList<E> implements List<E> {
     }
 
     public void reverse() {
-        Node currentNode = null;
-        Node previousNode = null;
+        Node current = head;
+        Node previous = null;
+        Node next;
 
-
+        while (current != null) {
+            // 1.  get the next of the current
+            next = current.next;
+            // 2. change the pointer of current to previous
+            current.next = previous;
+            // 3. make current as previos
+            previous = current;
+            // 4. make next as current
+            current = next;
+        }
+        // make the last node whose next is null as head (i.e previous)
+        head = previous;
     }
 
     private boolean isEmpty() {
