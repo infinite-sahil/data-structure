@@ -69,8 +69,64 @@ public class SinglyLinkedList<E> implements List<E> {
         head = previous;
     }
 
+
+    public int length(Node current) {
+        //base case
+        if (current == null) {
+            return 0;
+        }
+        return 1 + length(current.next);
+    }
+
+    /**
+     * to get the nth node from end
+     *
+     * @param n * @return nth node from last
+     */
+    public Node getLastNode(int n) {
+        Node fast = head;
+        Node slow = head;
+        int start = 1;
+        while (fast.next != null) {
+            fast = fast.next;
+            start++;
+            if (start > n) {
+                slow = slow.next;
+            }
+        }
+
+        return slow;
+    }
+
+    /**
+     * returns the last node or tail of this linked list
+     *
+     * @return last node
+     */
+    public Node tail() {
+        Node tail = head;
+        while (tail.next != null) {
+            tail = tail.next;
+        }
+        return tail;
+    }
+
     private boolean isEmpty() {
         return (head == null);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        Node current = head;
+        while (current != null) {
+            sb.append(current).append("-->");
+            current = current.next;
+        }
+        if (sb.length() >= 3) {
+            sb.delete(sb.length() - 3, sb.length());
+        }
+        return sb.toString();
     }
 
 

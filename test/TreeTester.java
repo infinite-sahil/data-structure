@@ -17,8 +17,10 @@ public class TreeTester {
         bst.insert(21, "TWELVE");
         bst.insert(22, "TWENTY-TWO");
 
-        bst.findMin().ifPresent((x) -> System.out.println("MIN: " + x.getKey()));
-        bst.findMax().ifPresent((x) -> System.out.println("MAX: " + x.getKey()));
+        bst.inOrder();
+
+        //   bst.findMin().ifPresent((x) -> System.out.println("MIN: " + x.getKey()));
+        //  bst.findMax().ifPresent((x) -> System.out.println("MAX: " + x.getKey()));
 
     }
 

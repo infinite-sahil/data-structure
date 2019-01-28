@@ -8,7 +8,7 @@ package org.somebody.ds.list;
 
 public class Node<E> {
 
-    private final E data;
+    public final E data;
     public Node next;
 
     public Node(final E data) {

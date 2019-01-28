@@ -115,7 +115,6 @@ public class BinarySearchTree {
                 parentNode.setRightChild(nodeToBeDeleted.getLeftChild());
             }
         }
-        
         // if node has one child that is on the right
         else if (nodeToBeDeleted.getLeftChild() == null) {
             if (nodeToBeDeleted == root) {
@@ -170,5 +169,60 @@ public class BinarySearchTree {
 
         return successorParent;
     }
+
+
+    /**
+     * LEFT --> ROOT --> RIGHT
+     * traverse the binary tree on InOrder traversal algorithm
+     */
+    public void inOrder() {
+        inOrder(root);
+    }
+
+    private void inOrder(Node node) {
+        if (node == null) {
+            return;
+        }
+
+        inOrder(node.getLeftChild());
+        System.out.printf("%s ", node.getKey());
+        inOrder(node.getRightChild());
+    }
+
+    /**
+     * ROOT --> LEFT --> RIGHT
+     * Java method to print tree nodes in PreOrder traversal
+     */
+    public void preOrder() {
+        preOrder(root);
+    }
+
+    private void preOrder(Node node) {
+        if (node == null) {
+            return;
+        }
+        System.out.printf("%s ", node.getKey());
+        preOrder(node.getLeftChild());
+        preOrder(node.getRightChild());
+    }
+
+
+    /**
+     * LEFT --> RIGHT --> ROOT
+     * traverse the binary tree on postOrder traversal algorithm
+     */
+    public void postOrder() {
+        postOrder(root);
+    }
+
+    private void postOrder(Node currRoot) {
+        if (currRoot == null) {
+            return;
+        }
+        postOrder(currRoot.getLeftChild());
+        postOrder(currRoot.getRightChild());
+        System.out.printf("%s ", currRoot.getKey());
+    }
+
 
 }
