@@ -27,15 +27,15 @@ public class BinarySearchTree {
             while (true) {
                 parent = current;
                 if (key < current.getKey()) {
-                    current = current.getLeftChild();
+                    current = current.leftChild;
                     if (current == null) {
-                        parent.setLeftChild(newNode);
+                        parent.leftChild = newNode;
                         return;
                     }
                 } else {
-                    current = current.getRightChild();
+                    current = current.rightChild;
                     if (current == null) {
-                        parent.setRightChild(newNode);
+                        parent.rightChild = newNode;
                         return;
                     }
                 }
@@ -48,8 +48,8 @@ public class BinarySearchTree {
         if (Objects.isNull(current))
             return Optional.empty();
 
-        while (current.getLeftChild() != null)
-            current = current.getLeftChild();
+        while (current.leftChild != null)
+            current = current.leftChild;
 
         return Optional.of(current);
     }
@@ -59,8 +59,8 @@ public class BinarySearchTree {
         if (Objects.isNull(current))
             return Optional.empty();
 
-        while (current.getRightChild() != null)
-            current = current.getRightChild();
+        while (current.rightChild != null)
+            current = current.rightChild;
 
         return Optional.of(current);
     }
@@ -82,10 +82,10 @@ public class BinarySearchTree {
             parentNode = currentNode;
             if (key < currentNode.getKey()) {
                 isLeftChild = true;
-                currentNode = currentNode.getLeftChild();
+                currentNode = currentNode.leftChild;
             } else {
                 isLeftChild = false;
-                currentNode = currentNode.getRightChild();
+                currentNode = currentNode.rightChild;
             }
             // in case, not able to find the key
             if (currentNode == null)
@@ -96,33 +96,33 @@ public class BinarySearchTree {
         Node nodeToBeDeleted = currentNode;
 
         // if node is a leaf node
-        if (nodeToBeDeleted.getLeftChild() == null && nodeToBeDeleted.getRightChild() == null) {
+        if (nodeToBeDeleted.leftChild == null && nodeToBeDeleted.rightChild == null) {
             if (nodeToBeDeleted == root) {
                 root = null;
             } else if (isLeftChild) {
-                parentNode.setLeftChild(null);
+                parentNode.leftChild = null;
             } else {
-                parentNode.setRightChild(null);
+                parentNode.rightChild = null;
             }
         }
         // if node has one child that is on the left
-        else if (nodeToBeDeleted.getRightChild() == null) {
+        else if (nodeToBeDeleted.rightChild == null) {
             if (nodeToBeDeleted == root) {
-                root = nodeToBeDeleted.getLeftChild();
+                root = nodeToBeDeleted.leftChild;
             } else if (isLeftChild) {
-                parentNode.setLeftChild(nodeToBeDeleted.getLeftChild());
+                parentNode.leftChild = nodeToBeDeleted.leftChild;
             } else {
-                parentNode.setRightChild(nodeToBeDeleted.getLeftChild());
+                parentNode.rightChild = nodeToBeDeleted.leftChild;
             }
         }
         // if node has one child that is on the right
-        else if (nodeToBeDeleted.getLeftChild() == null) {
+        else if (nodeToBeDeleted.leftChild == null) {
             if (nodeToBeDeleted == root) {
-                root = nodeToBeDeleted.getRightChild();
+                root = nodeToBeDeleted.rightChild;
             } else if (isLeftChild) {
-                parentNode.setLeftChild(nodeToBeDeleted.getRightChild());
+                parentNode.leftChild = nodeToBeDeleted.rightChild;
             } else {
-                parentNode.setRightChild(nodeToBeDeleted.getRightChild());
+                parentNode.rightChild = nodeToBeDeleted.rightChild;
             }
         }
         // if node has two child (tricky)
@@ -134,12 +134,12 @@ public class BinarySearchTree {
             if (nodeToBeDeleted == root) {
                 root = successor;
             } else if (isLeftChild) {
-                parentNode.setLeftChild(successor);
+                parentNode.leftChild = successor;
             } else {
-                parentNode.setRightChild(successor);
+                parentNode.rightChild = successor;
             }
 
-            successor.setLeftChild(nodeToBeDeleted.getLeftChild());
+            successor.leftChild = nodeToBeDeleted.leftChild;
         }
 
         return true;
@@ -151,20 +151,20 @@ public class BinarySearchTree {
         Node successor = nodeToBeDeleted;
 
         // go to the right child
-        Node current = successor.getRightChild();
+        Node current = successor.rightChild;
 
         // start going left down the tree until node has no left child
         while (current != null) {
             successorParent = successor;
             successor = current;
-            current = current.getLeftChild();
+            current = current.leftChild;
         }
         // if successor is not a right child
-        if (successor != nodeToBeDeleted.getRightChild()) {
+        if (successor != nodeToBeDeleted.rightChild) {
             // plug right child of the successor to the left child of successor parent
-            successorParent.setLeftChild(successor.getRightChild());
+            successorParent.leftChild = successor.rightChild;
             // plug right child of the node to be deleted inside the successor right
-            successor.setRightChild(nodeToBeDeleted.getRightChild());
+            successor.rightChild = nodeToBeDeleted.rightChild;
         }
 
         return successorParent;
@@ -172,57 +172,82 @@ public class BinarySearchTree {
 
 
     /**
-     * LEFT --> ROOT --> RIGHT
-     * traverse the binary tree on InOrder traversal algorithm
+     * LEFT --> ROOT --> RIGHT traverse the binary tree on InOrder traversal algorithm
      */
     public void inOrder() {
         inOrder(root);
     }
 
-    private void inOrder(Node node) {
+    private void inOrder(final Node node) {
         if (node == null) {
             return;
         }
 
-        inOrder(node.getLeftChild());
+        inOrder(node.leftChild);
         System.out.printf("%s ", node.getKey());
-        inOrder(node.getRightChild());
+        inOrder(node.rightChild);
     }
 
     /**
-     * ROOT --> LEFT --> RIGHT
-     * Java method to print tree nodes in PreOrder traversal
+     * ROOT --> LEFT --> RIGHT Java method to print tree nodes in PreOrder traversal
      */
     public void preOrder() {
         preOrder(root);
     }
 
-    private void preOrder(Node node) {
+    private void preOrder(final Node node) {
         if (node == null) {
             return;
         }
         System.out.printf("%s ", node.getKey());
-        preOrder(node.getLeftChild());
-        preOrder(node.getRightChild());
+        preOrder(node.leftChild);
+        preOrder(node.rightChild);
     }
 
 
     /**
-     * LEFT --> RIGHT --> ROOT
-     * traverse the binary tree on postOrder traversal algorithm
+     * LEFT --> RIGHT --> ROOT traverse the binary tree on postOrder traversal algorithm
      */
     public void postOrder() {
         postOrder(root);
     }
 
-    private void postOrder(Node currRoot) {
+    private void postOrder(final Node currRoot) {
         if (currRoot == null) {
             return;
         }
-        postOrder(currRoot.getLeftChild());
-        postOrder(currRoot.getRightChild());
+        postOrder(currRoot.leftChild);
+        postOrder(currRoot.rightChild);
         System.out.printf("%s ", currRoot.getKey());
     }
 
+    public static void printLeafNodes(final Node node) {
+        // base condition
+        if (node == null) {
+            return;
+        }
+        if (node.leftChild == null && node.rightChild == null) {
+            System.out.printf("%d ", node.getKey());
+        }
+        printLeafNodes(node.leftChild);
+        printLeafNodes(node.rightChild);
+    }
+
+    static class Node {
+
+        private final int key;
+        final String value;
+        Node leftChild;
+        Node rightChild;
+
+        public Node(final int key, final String value) {
+            this.key = key;
+            this.value = value;
+        }
+
+        public int getKey() {
+            return key;
+        }
+    }
 
 }
