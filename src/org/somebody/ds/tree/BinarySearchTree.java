@@ -65,10 +65,8 @@ public class BinarySearchTree {
         return Optional.of(current);
     }
 
-    // TODO: WIP
-
     /**
-     * 1. if node is a leaf node 2.        if node has one child 3.        if node has two child
+     * 1. if node is a leaf node  2.        if node has one child 3.        if node has two child
      */
     public boolean remove(final int key) {
 
