@@ -6,8 +6,10 @@ package org.somebody.ds.tree;
  * ****************************************************************
  */
 
+import java.util.LinkedList;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Queue;
 
 public class BinarySearchTree {
 
@@ -229,6 +231,21 @@ public class BinarySearchTree {
         }
         printLeafNodes(node.leftChild);
         printLeafNodes(node.rightChild);
+    }
+
+    // prints in level order
+    public static void levelOrderTraversal(Node startNode) {
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(startNode);
+
+        while (!queue.isEmpty()) {
+            Node tempNode = queue.poll();
+            System.out.printf("%d ", tempNode.key);
+            if (tempNode.leftChild != null)
+                queue.add(tempNode.leftChild);
+            if (tempNode.rightChild != null)
+                queue.add(tempNode.rightChild);
+        }
     }
 
     static class Node {
