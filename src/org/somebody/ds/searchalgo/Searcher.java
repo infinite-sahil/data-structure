@@ -61,4 +61,25 @@ public class Searcher {
     }
 
 
+    public static int recursiveBinarySearch(final int[] elements, final int searchElement) {
+        return binarySearch(elements, searchElement, 0, (elements.length - 1));
+    }
+
+    private static int binarySearch(final int[] elements, final int searchElement, int low,
+            int high) {
+
+        int mid = (low + high) / 2;
+        if (low > high)
+            return -1;
+
+        if (elements[mid] == searchElement)
+            return mid;
+
+        if (elements[mid] > searchElement)
+            return binarySearch(elements, searchElement, low, mid - 1);
+        else
+            return binarySearch(elements, searchElement, mid + 1, high);
+    }
+
+
 }

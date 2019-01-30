@@ -19,7 +19,10 @@ public class SearcherTest {
         // Binary Search
         int[] arr = new int[]{10, 11, 15, 34, 56, 76, 87, 98};
         System.out.println("Using Binary Search - Element found at index: "
-                + Searcher.binarySearch(arr, 76));
+                + Searcher.binarySearch(arr, 98));
+
+        System.out.println("Using recursive Binary Search - Element found at index: "
+                + Searcher.recursiveBinarySearch(arr, 11));
 
     }
 
