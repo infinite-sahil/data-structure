@@ -49,7 +49,6 @@ public class Heap {
 
         // loop as long as we haven't reached the root of the heap
         // and key of the nodeToInsert parent is less than new node
-
         while (index > 0 && heapArray[parentIdx].key < nodeToInsert.key) {
             heapArray[index] = heapArray[parentIdx]; // move parent down
             index = parentIdx;
