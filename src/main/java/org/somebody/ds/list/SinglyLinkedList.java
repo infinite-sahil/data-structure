@@ -23,8 +23,9 @@ public class SinglyLinkedList<E> implements List<E> {
     @Override
     public void insertAtEnd(final E element) {
         Node curNode = this.head;
-        while (curNode.next != null)
+        while (curNode.next != null) {
             curNode = curNode.next;
+        }
 
         final Node newNode = new Node(element);
         curNode.next = newNode;
@@ -32,8 +33,9 @@ public class SinglyLinkedList<E> implements List<E> {
 
     @Override
     public void deleteFromFront() {
-        if (isEmpty())
+        if (isEmpty()) {
             return;
+        }
 
         head = this.head.next;
         //todo nullify deleted object to avail for GC
@@ -53,20 +55,37 @@ public class SinglyLinkedList<E> implements List<E> {
     public void reverse() {
         Node current = head;
         Node previous = null;
-        Node next;
-
+        Node next = null;
         while (current != null) {
             // 1.  get the next of the current
             next = current.next;
             // 2. change the pointer of current to previous
             current.next = previous;
-            // 3. make current as previos
+            // 3. make current as previous
             previous = current;
             // 4. make next as current
             current = next;
         }
         // make the last node whose next is null as head (i.e previous)
         head = previous;
+    }
+
+    public void reverseMe() {
+        // curNode -> head and previous node in the start is null
+        recursiveReverse(head, null);
+    }
+
+    private Node recursiveReverse(Node curNode, Node previousNode) {
+        final Node nextNode = curNode.next;
+        /* Base condition: If its last node --> mark it as head */
+        if (nextNode == null) {
+            // link it to previous
+            curNode.next = previousNode;
+            return (head = curNode);
+        }
+        curNode.next = previousNode;
+        recursiveReverse(nextNode, curNode);
+        return head;
     }
 
 
@@ -128,6 +147,5 @@ public class SinglyLinkedList<E> implements List<E> {
         }
         return sb.toString();
     }
-
 
 }

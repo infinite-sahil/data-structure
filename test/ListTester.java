@@ -19,15 +19,13 @@ public class ListTester {
         linkedList.insertAtFront('A');
 
         linkedList.display();
-        linkedList.reverse();
+        linkedList.reverseMe();
         linkedList.display();
 
-        linkedList.deleteFromFront();
+     /*   linkedList.deleteFromFront();
         linkedList.insertAtFront('X');
         linkedList.insertAtEnd('Z');
-        linkedList.display();
-
-
+        linkedList.display();*/
 
     }
 

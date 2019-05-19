@@ -14,7 +14,7 @@ public class StackTester {
     public static void main(String[] args) {
         final Stack<Character> characterStack = new ArrayAsStack(3);
 
-        //Exception in thread "main" org.somebody.ds.stackUsingArray.StackException: ArrayAsStack is Empty!
+        //Exception in thread "main" ds.stackUsingArray.StackException: ArrayAsStack is Empty!
         // stackUsingArray.peak();
 
         characterStack.push('A');
