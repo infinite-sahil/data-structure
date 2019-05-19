@@ -6,6 +6,10 @@ package org.somebody.ds.list;
  * ****************************************************************
  */
 
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
+
 public class SinglyLinkedList<E> implements List<E> {
 
     private Node head;
@@ -88,6 +92,17 @@ public class SinglyLinkedList<E> implements List<E> {
         return head;
     }
 
+    public Node findMidElementOfList() {
+
+        Node slow = this.head;
+        Node fast = this.head;
+        while (fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        return slow;
+    }
+
 
     public int length(Node current) {
         //base case
@@ -98,23 +113,90 @@ public class SinglyLinkedList<E> implements List<E> {
     }
 
     /**
-     * to get the nth node from end
+     * To get the nth node from end of the list Logic: Maintain a counter and increase it by 1. when
+     * this counter become greater than input value (n), then start slow node.
+     *
+     * by this when fast node will reach the end, slow will be at the desired node.
      *
      * @param n * @return nth node from last
      */
-    public Node getLastNode(int n) {
+    public Optional<Node> getNthNodeFromLast(int n) {
+        if (validateInputValue(n)) {
+            return Optional.empty();
+        }
         Node fast = head;
         Node slow = head;
-        int start = 1;
+        int whenToMoveSlowNodeCounter = 1;
         while (fast.next != null) {
             fast = fast.next;
-            start++;
-            if (start > n) {
+            if ((++whenToMoveSlowNodeCounter) > n) {
                 slow = slow.next;
             }
         }
+        return Optional.of(slow);
+    }
 
-        return slow;
+
+    /* * If singly LinkedList contains Cycle then following would be true
+     * 1) slow and fast will point to same node i.e. they meet
+     * On the other hand if fast will point to null or next node of
+     * fast will point to null then LinkedList does not contains cycle.
+     * */
+    public boolean detectAndRemoveLoop(boolean doYouWannaRemoveLoop) {
+        Node fast = head, slow = head;
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+
+            //if fast and slow pointers are meeting then LinkedList is cyclic
+            if (fast == slow) {
+                if (doYouWannaRemoveLoop) {
+                    removeLoop(slow, head);
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    public boolean removeLoopUsingHashing() {
+
+        Node ptr = head, previous = null;
+        Set<Integer> nodeHash = new HashSet<>();
+        while (ptr != null) {
+            int curHash = ptr.hashCode();
+            if (nodeHash.contains(curHash)) {
+                previous.next = null;
+                return true;
+            }
+            nodeHash.add(curHash);
+            previous = ptr;
+            ptr = ptr.next;
+        }
+        return false;
+    }
+
+    //@formatter:off
+    /**
+     * This is the best way to remove a loop Whenever loop is detected:
+     *
+     * Make Slow --> head
+     * Make Fast --> meetPoint (i.e at same location it is)
+     *
+     * Now move both pointer with same pace.
+     */
+
+    //@formatter:on
+    private void removeLoop(final Node meetPoint, final Node head) {
+
+        Node ptr1 = head, ptr2 = meetPoint;
+
+        while (ptr1.next != ptr2.next) {
+            ptr1 = ptr1.next;
+            ptr2 = ptr2.next;
+        }
+        ptr2.next = null;
     }
 
     /**
@@ -147,5 +229,17 @@ public class SinglyLinkedList<E> implements List<E> {
         }
         return sb.toString();
     }
+
+    private boolean validateInputValue(final int n) {
+        if (this.head == null) {
+            return true;
+        }
+        if (n > this.length(head)) {
+            System.out.println("N is greater than number of elements in the node");
+            return true;
+        }
+        return false;
+    }
+
 
 }

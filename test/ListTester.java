@@ -19,7 +19,8 @@ public class ListTester {
         linkedList.insertAtFront('A');
 
         linkedList.display();
-        linkedList.reverseMe();
+        //linkedList.reverseMe();
+        System.out.println(linkedList.getNthNodeFromLast(10).data);
         linkedList.display();
 
      /*   linkedList.deleteFromFront();
