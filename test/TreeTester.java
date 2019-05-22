@@ -6,7 +6,7 @@
  * ****************************************************************
  */
 
-import org.somebody.ds.tree.BinarySearchTree;
+import org.somebody.ds.tree.another.BinarySearchTree;
 
 public class TreeTester {
 

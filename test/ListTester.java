@@ -20,7 +20,7 @@ public class ListTester {
 
         linkedList.display();
         //linkedList.reverseMe();
-        System.out.println(linkedList.getNthNodeFromLast(10).data);
+        System.out.println(linkedList.getNthNodeFromLast(10));
         linkedList.display();
 
      /*   linkedList.deleteFromFront();
